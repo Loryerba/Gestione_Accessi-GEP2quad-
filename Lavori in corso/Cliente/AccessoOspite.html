@@ -11,7 +11,7 @@
 
 <body>
     <center>
-        <form action="checkForm.php">
+        <form action="checkForm.php" onsubmit="return checkFields()" name = "meeting" id = "meeting" onload="loadPage()">
             <h2>Prego, prenoti l'appuntamento</h2>
             <h4>Selezioni la data e l'ora desiderata:</h4>
             <input type="datetime-local" id="meeting-time" name="meeting-time" value="2020-02-12T19:30"
@@ -40,8 +40,10 @@
 
             <button type="submit">Prenoti l'appuntamento</button>
             <button type="reset">Reset</button>
-            <a href="index.html"><button>Esci</button></a>
+            <br><br>
         </form>
+        
+        <a href="../index.html"><button>Esci</button></a>
     </center>
 </body>
 
