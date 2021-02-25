@@ -6,49 +6,45 @@ function loadPage() {
 }
 
 function checkFields() {
-    var c = false;
-
     //Get values from fields
     var meetingTime = document.getElementById("meeting-time").value;
     var name = document.getElementById("meeting-nameClient").value;
     var meetingObject = document.getElementById("meeting-object").value;
-    //var meetingDescription = document.getElementById("meeting-description").value;
     var meetingEmployee = document.getElementById("meeting-employee").value;
     var meetingEmailClient = document.getElementById("meeting-emailClient").value;
 
     //Check values
     if ((meetingTime == "") || (meetingTime == null)) {
-        c = true;
-    }
-
-    if ((name == "") || (name == null)) {
-        c = true;
-    }
-
-    if ((meetingObject == "") || (meetingObject == null)) {
-        c = true;
-    }
-
-    // if ((meetingDescription == "") || (meetingDescription == null)) {
-    //     c = true;
-    // }
-
-    if ((meetingEmployee == "") || (meetingEmployee == null)) {
-        c = true;
-    }
-
-    if ((meetingEmailClient == "") || (meetingEmailClient == null)) {
-        c = true;
-    }
-
-    //Final check
-    if (c) {
-        //There are some errors
         messageError();
         return false;
     }
+
+    if ((name == "") || (name == null)) {
+        messageError();
+        return false;
+    }
+
+    if ((meetingObject == "") || (meetingObject == null)) {
+        messageError();
+        return false;
+    }
+
+    if ((meetingEmployee == "") || (meetingEmployee == null)) {
+        messageError();
+        return false;
+    }
+
+    if ((meetingEmailClient == "") || (meetingEmailClient == null)) {
+        messageError();
+        return false;
+    } else {
+        if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(myForm.meetingEmailClient.value))) {
+            messageError();
+            return false;
+        }
+    }
 }
 
-function messageError(){
+function messageError() {
     alert("Attenzione, controlla i campi inseriti");
 }

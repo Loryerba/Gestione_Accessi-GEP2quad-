@@ -28,7 +28,7 @@ if (isset($_GET['submit-meeting'])) {
         exit();
     }
 
-    else if (($meetingEmployee == "") || ($meetingEmployee == null) || ($meetingEmployee == 'option') ) {
+    else if (($meetingEmployee == "") || ($meetingEmployee == null) || ($meetingEmployee == "Seleziona qualcuno")) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=no-meetingEmployee");
         exit();
@@ -36,7 +36,13 @@ if (isset($_GET['submit-meeting'])) {
 
     else if (($meetingEmailClient == "") || ($meetingEmailClient == null)) {
         //Return to 'AccessoOspite.php'
-        header("Location: ../AccessoOspite.php?error=no-meetingEmployee");
+        header("Location: ../AccessoOspite.php?error=no-meetingEmailClient");
+        exit();
+    }
+
+    else if(!filter_var($meetingEmailClient, FILTER_VALIDATE_EMAIL)){
+        //Return to 'AccessoOspite.php'
+        header("Location: ../AccessoOspite.php?error=notcorrect-meetingEmailClient");
         exit();
     }
 
