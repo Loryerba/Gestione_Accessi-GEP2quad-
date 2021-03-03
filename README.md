@@ -1,3 +1,5 @@
 # Gestione_Accessi-GEP2quad
 
-Pagina della documentazione del progetto
+Progetto: Gestione accessi
+
+By Lorenzo Erba, Davide Corbetta & Matteo Cacciarino
