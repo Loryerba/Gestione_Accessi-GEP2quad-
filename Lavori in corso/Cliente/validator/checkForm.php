@@ -14,59 +14,47 @@ if (isset($_GET['submit-meeting'])) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=no-meetingTime");
         exit();
-    }
-
-    else if (($name == "") || ($name == null)) {
+    } else if (($name == "") || ($name == null)) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=no-name");
         exit();
-    }
-
-    else if (($meetingObject == "") || ($meetingObject == null)) {
+    } else if (($meetingObject == "") || ($meetingObject == null)) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=no-meetingObject");
         exit();
-    }
-
-    else if (($meetingEmployee == "") || ($meetingEmployee == null) || ($meetingEmployee == "Seleziona qualcuno")) {
+    } else if (($meetingEmployee == "") || ($meetingEmployee == null) || ($meetingEmployee == "Seleziona qualcuno")) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=no-meetingEmployee");
         exit();
-    }
-
-    else if (($meetingEmailClient == "") || ($meetingEmailClient == null)) {
+    } else if (($meetingEmailClient == "") || ($meetingEmailClient == null)) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=no-meetingEmailClient");
         exit();
-    }
-
-    else if(!filter_var($meetingEmailClient, FILTER_VALIDATE_EMAIL)){
+    } else if (!filter_var($meetingEmailClient, FILTER_VALIDATE_EMAIL)) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=notcorrect-meetingEmailClient");
         exit();
-    }
+    } else {
 
-    else{
-        echo "Appuntamento prenotato";
-        include '../validator/connection.php';
-        $conn = connect('d16206619_dbaccessi');
-        $sql = "SELECT * FROM Administrator;";
-        
+        //Query
+        $sql = "SELECT * FROM Administrator WHERE Id_A = '$meetingEmployee'";
+
+        include 'connection.php';
+        $conn = connect('id16206619_dbaccessi');
 
         $result = $conn->query($sql);
-        echo $result;
-        if (($result->num_rows) > 0) {
+
+        if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                $cognome = $row['Cognome'];
-                $nome = $row['Nome'];
-                $id = $row['Id_A'];
-                echo $id;
+                $emailAdmin = $row['Email'];
             }
+
+            header("Location: sendEmail.php?email='$emailAdmin'");
+            exit();
+        } else {
+            //Return to 'AccessoOspite.php'
+            header("Location: ../AccessoOspite.php?error=submit-form");
+            exit();
         }
     }
-
-} else {
-    //Return to 'AccessoOspite.php'
-    header("Location: ../AccessoOspite.php?error=submit-form");
-    exit();
 }
