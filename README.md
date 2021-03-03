@@ -1,3 +1,5 @@
 # Gestione_Accessi-GEP2quad
 
-First prototype
+Progetto: Gestione accessi
+
+By Lorenzo Erba, Davide Corbetta & Matteo Cacciarino
