@@ -4,7 +4,3 @@ function setPreviousDate(){
     
 }
 
-function mia(){
-    var x = document.getElementById("orario").value;
-    alert(x);
-}

@@ -57,7 +57,8 @@ if (empty($_POST['n_username'])) {
 
         // salvataggio della password con criptaggio di base
 
-        $password = test_input($_POST['n_password']);
+        $password = password_hash(test_input($_POST['n_password']), PASSWORD_DEFAULT);
+
 
         $conn = connect($dbname);
 
@@ -87,7 +88,8 @@ if (empty($_POST['n_username'])) {
             if ($result->num_rows > 0) {
 
                 while ($row = $result->fetch_assoc()) {
-                    if ($mail == $row['Email'] && $password == $row['Password_']) {
+
+                    if ($mail == $row['Email'] && password_verify($row['Password_'], $password) == 1) {
 
                         //setting del flag booleano a true
 
@@ -120,17 +122,20 @@ if (empty($_POST['n_username'])) {
                         $_SESSION['logged'] = true;
                         // realizzazione della sessione timesetted, contenente l'orario in cui si è loggato l'utente.
                         $_SESSION['timesetted'] = time();
+                        // realizzazione della sessione idadmin, contenente l'id dell'admin che ha effettuato l'accesso
+                        $_SESSION['idadmin'] = $id;
                         redirect_to_pnl();
                     } else {
+                        // chiusura connessione al database
+                        $conn->close();
                         //redirect alla pagina index con error type = 8
 
                         // error type => 8 => errore durante il salvataggio dei log 
-
-                        echo $sql;
-                        //redirect(8);
+                        redirect(8);
                     }
                 } else {
-
+                    // chiusura connessione al database
+                    $conn->close();
                     //redirect alla pagina index con error type = 5
 
                     // error type => 5 => nessun record coincide con quello inserito
@@ -138,7 +143,8 @@ if (empty($_POST['n_username'])) {
                     redirect(5);
                 }
             } else {
-
+                // chiusura connessione al database
+                $conn->close();
                 //redirect alla pagina index con error type = 6
 
                 // error type => 6 => il database non contiene amministratori
