@@ -1,0 +1,40 @@
+.errorMessages{
+    color: red;
+}
+
+#container{
+
+    margin-top : 2%;
+
+}
+
+.content{
+
+    margin-top : 4%;
+
+}
+
+.divButton{
+
+    padding: 16px;
+    background-color:#59c0f349;
+    width : 25%;
+    border-radius: 8px;
+
+}
+
+/* PER ESTETICA LINEA */
+
+.linea {
+
+    border:none;
+    height: 20px;
+    width: 90%;
+    height: 50px;
+    margin-top: 0;
+    border-bottom: 1px solid #5d82fab2;
+    box-shadow: 0 20px 20px -20px rgb(88, 85, 85);
+    margin: -50px auto 10px;
+    animation: gradientRiga 25s ease infinite;
+
+}
