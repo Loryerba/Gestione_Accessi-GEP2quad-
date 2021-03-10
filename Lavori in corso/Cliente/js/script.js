@@ -5,7 +5,7 @@ function loadPage() {
     document.getElementsByName("meeting-time")[0].setAttribute('min', today);
 }
 
-function checkFields() {
+function checkField() {
     //Get values from fields
     var meetingTime = document.getElementById("meeting-time").value;
     var name = document.getElementById("meeting-nameClient").value;

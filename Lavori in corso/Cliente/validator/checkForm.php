@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 //Check get
 if (isset($_GET['submit-meeting'])) {
     //Get values from method GET
@@ -12,27 +14,27 @@ if (isset($_GET['submit-meeting'])) {
     //Check values
     if (($meetingTime == "") || ($meetingTime == null)) {
         //Return to 'AccessoOspite.php'
-        header("Location: ../AccessoOspite.php?error=no-meetingTime");
+        header("Location: ../AccessoOspite.php?error=Data e ora del meeting non selezionate");
         exit();
     } else if (($name == "") || ($name == null)) {
         //Return to 'AccessoOspite.php'
-        header("Location: ../AccessoOspite.php?error=no-name");
+        header("Location: ../AccessoOspite.php?error=Nominativo non inserito");
         exit();
     } else if (($meetingObject == "") || ($meetingObject == null)) {
         //Return to 'AccessoOspite.php'
-        header("Location: ../AccessoOspite.php?error=no-meetingObject");
+        header("Location: ../AccessoOspite.php?error=Nessun oggetto del meeting inserito");
         exit();
     } else if (($meetingEmployee == "") || ($meetingEmployee == null) || ($meetingEmployee == "Seleziona qualcuno")) {
         //Return to 'AccessoOspite.php'
-        header("Location: ../AccessoOspite.php?error=no-meetingEmployee");
+        header("Location: ../AccessoOspite.php?error=Nessun impiegato selezionato");
         exit();
     } else if (($meetingEmailClient == "") || ($meetingEmailClient == null)) {
         //Return to 'AccessoOspite.php'
-        header("Location: ../AccessoOspite.php?error=no-meetingEmailClient");
+        header("Location: ../AccessoOspite.php?error=Nessuna email inserita");
         exit();
     } else if (!filter_var($meetingEmailClient, FILTER_VALIDATE_EMAIL)) {
         //Return to 'AccessoOspite.php'
-        header("Location: ../AccessoOspite.php?error=notcorrect-meetingEmailClient");
+        header("Location: ../AccessoOspite.php?error=Email non valida");
         exit();
     } else {
 
@@ -49,11 +51,15 @@ if (isset($_GET['submit-meeting'])) {
                 $emailAdmin = $row['Email'];
             }
 
-            header("Location: sendEmail.php?email='$emailAdmin'");
+            $_SESSION['nominativoCliente'] = $name;
+            $_SESSION['emailCliente'] = $meetingEmailClient;
+            $_SESSION['to'] = $emailAdmin;
+
+            header("Location: sendEmail.php");
             exit();
         } else {
             //Return to 'AccessoOspite.php'
-            header("Location: ../AccessoOspite.php?error=submit-form");
+            header("Location: ../AccessoOspite.php?error=Errore invio form, riprova");
             exit();
         }
     }
