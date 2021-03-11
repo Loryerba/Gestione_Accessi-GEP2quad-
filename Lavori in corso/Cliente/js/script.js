@@ -46,5 +46,5 @@ function checkField() {
 }
 
 function messageError() {
-    alert("Attenzione, controlla i campi inseriti");
+    window.alert("Attenzione, controlla i campi inseriti");
 }
