@@ -1,3 +1,46 @@
+<?php
+// includo il file php per effettuare la modifica del record
+include 'validator/validateModificaRecord.php';
+//faccio partire le sessioni per la gestione del logged in dell'utente
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+/**
+ * Controllo se l'utente si è loggato prima di accedere a tale pagina e se non rimane in afk
+ */
+if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
+    //redirect alla pagina 1
+    redirect("7");
+} else if (time() - $_SESSION['timesetted'] > 1000000) {
+    //eliminazione della sessione timesetted
+    unset($_SESSION['timesetted']);
+    //eliminazione della sessione user
+    unset($_SESSION['user']);
+    //eliminazione della sessione logged
+    unset($_SESSION['logged']);
+    //redirect alla pagina 1
+    redirect("7");
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+if (isset($_GET["id"])) {
+    $values = getArrayOfAttribute($_GET["id"]);
+}
+
+
+function redirect($errortype)
+{
+
+    header("location: login.php?error=$errortype");
+
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -7,28 +50,41 @@
     <title>Completa modifica</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='#'></script>
+    <script src='js/script.js'></script>
 </head>
-<style>
-    table,td,th{
-        border:1px solid black;
-        border-collapse: collapse;
-    }
-</style>
+
+
 <body>
     <center>
         <h2> Modifica del meeting selezionato</h2>
         <!--Ricevere via get il record selezionato e prevedo la modifica dei campi-->
-        <table>
-            <tr>
-                <th> Data Meeting</th>
-                <th> Ora Meeting</th>
-                <th> Descrizione</th>
-            </tr>
-        </table>
-        <!-- Al click, aggiornare il record nel db e inviare mail di modifica -->
-        <p> <button onclick="window.location.href='modificameeting.php'">Modifica Meeting </button></p>
-        <p> <button onclick="window.location.href='modificameeting.php'"> Indietro </button> </p>
+        <form action='validator/validateModificaRecord.php' method='post'>
+            <table>
+                <tr>
+                    <th> Id Meeting</th>
+                    <th> Data Meeting</th>
+                    <th> Ora Meeting</th>
+                    <th> Email dell'amministratore</th>
+                    <th> Email del partecipante</th>
+                    <th> Descrizione</th>
+                </tr>
+
+                <?php
+                // se è settata la variabile values, vuol dire che non ci sono stati errori nell'ottenere il record richiesto per la modifica
+                if (isset($values)) {
+                    echo "<tr> <td><input type='number' name='idm' value='$values[Id_M]' min='1' max='999'></td><td><input type='date' name='datameeting' value='$values[DataM]'></td> <td> <input type='time' name='oram' value='$values[OraM]'></td> 
+                <td> <input type='text' name='aemail' value='$values[aemail]'> </td> <td> <input type='text' name='peamil' value='$values[pemail]'> </td> 
+                <td> <input type='text' name='descrizione' value='$values[Descrizione]'</td></tr>";
+                    echo "<script>
+                setPreviousDate();
+            </script>";
+                }
+                ?>
+            </table>
+
+            <p><input type='submit' value='Conferma modifiche'> </p>
+        </form>
+        <button onclick="window.location.href='modificameeting.php'"> Indietro </button>
     </center>
 </body>
 

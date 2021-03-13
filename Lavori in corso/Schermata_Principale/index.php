@@ -5,7 +5,8 @@
     <title>Pannello principale</title>
     <link rel="stylesheet" href="cssIndex/style.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-    <script src="js/script.js"></script>
+    <link rel="icon" type= “image/x-icon”  href="faviconFolderIndex/favicon001.ico"/>
+
     <style>
         
     </style>

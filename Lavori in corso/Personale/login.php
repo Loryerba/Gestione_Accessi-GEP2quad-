@@ -9,6 +9,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='#'>
     <link rel="stylesheet" href="css/styleLogin.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> <!-- FONT BELLO -->
+    <link rel="icon" type= “image/x-icon”  href="faviconFolder/favicon001.ico"/>
     <script src='js/script.js'></script>
 </head>
 
