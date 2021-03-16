@@ -41,11 +41,15 @@ if ($table == "notable") {
  * confirm => 1 => modifica avvenuta con successo
  * 
  * error => 1 => errore durante l'interrogazione del database, prodotto più di un record o zero
+ * 
+ * error => 2=> record aggiornato correttamente
  */
 if (isset($_GET["confirm"]) && $_GET["confirm"] == 1) {
     echo "<script> alert('Modifica avvenuta con successo') </script>";
 } else if (isset($_GET["error"]) && $_GET["error"] == 1) {
     echo "<script> alert('Error getting record meeting') </script>";
+} else if (isset($_GET["error"]) && $_GET["error"] == 2) {
+    echo "<script> alert('Error executing query') </script>";
 }
 
 function redirect($errortype)

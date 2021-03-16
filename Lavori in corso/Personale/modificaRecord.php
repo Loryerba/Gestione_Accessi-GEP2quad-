@@ -32,6 +32,35 @@ if (isset($_GET["id"])) {
 }
 
 
+/**
+ * error type
+ * 
+ * error => 1 =>  Compilare tutti i campi
+ * 
+ * error => 2 => Errore durante l'interrogazione al database per amministratore
+ * 
+ * error => 3 => Errore durante l'interrogazione al database per cliente
+ * 
+ * error => 4 => Oraio non valido
+ * 
+ * error => 5 => Data non valida
+ */
+if (isset($_GET["error"]) && $_GET["error"] == 1) {
+    echo "<script> alert('Compilare tutti i campi') </script>";
+}
+else if(isset($_GET["error"]) && $_GET["error"] == 2){
+    echo "<script> alert('Errore durante l'interrogazione al database per amministratore') </script>";
+}
+else if(isset($_GET["error"]) && $_GET["error"] == 3){
+    echo "<script> alert('Errore durante l'interrogazione al database per cliente') </script>";
+}
+else if(isset($_GET["error"]) && $_GET["error"] == 4){
+    echo "<script> alert('Oraio non valido') </script>";
+}
+else if(isset($_GET["error"]) && $_GET["error"] == 5){
+    echo "<script> alert('Data non valida') </script>";
+}
+
 function redirect($errortype)
 {
 

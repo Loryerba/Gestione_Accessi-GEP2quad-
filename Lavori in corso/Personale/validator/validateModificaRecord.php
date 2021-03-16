@@ -7,7 +7,7 @@ $apertura = "08:00";
 $chiusura = "17:30";
 //controllo se è stato effettuata una richiesta POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+    $idm = $_POST['idm'];
     //controllo se tutti i campi sono compilati
     if (
         empty($_POST['datameeting']) || empty($_POST['oram']) || empty($_POST['aemail']) || empty($_POST['peamil']) || empty($_POST['descrizione'])
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //caso in cui alcuni campi sono vuoti
         //redirect alla pagina modificaRecord.php con error type = 1
         // errror => 1 => Compilare tutti i campi
-        redirect_to_record(1);
+        redirect_to_record(1,$idm);
     } else {
         //controllo se l'orario inserito è corretto
         $orario = new DateTime($_POST['oram']);
@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $idc = $row['Id_P'];
                         // ottengo la descrizione del meeting
                         $descrizione = $_POST['descrizione'];
-                        $idm = $_POST['idm'];
+                        
                         modifyMeeting($idm, $ida, $idc, $orario, $datameeting, $descrizione, $conn);
                     } else {
 
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         // caso in cui vengono prodotti più risultati di 1 oppure nessun risultato
                         // redirect alla pagina modificaRecord.php con error type = 3
                         // error => 3 => Errore durante l'interrogazione al database per cliente
-                        redirect_to_record(3);
+                        redirect_to_record(3,$idm);
                     }
                 } else {
                     // chiusura connessione al database
@@ -68,19 +68,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // caso in cui vengono prodotti più risultati di 1 oppure nessun risultato
                     // redirect alla pagina modificaRecord.php con error type = 2
                     // error => 2 => Errore durante l'interrogazione al database per amministratore
-                    redirect_to_record(2);
+                    redirect_to_record(2,$idm);
                 }
             } else {
                 // caso in cui viene selezionata una data non valida
                 // redirect alla pagina modificaRecord.php con error type = 5
                 // error => 5 => Data non valida
-                redirect_to_record(5);
+                redirect_to_record(5,$idm);
             }
         } else {
             // caso in cui viene inserito un orario che non rientra in quello valido
             // redirect alla pagina modificaRecord.php con errror type = 4
             // error => 4 => Oraio non valido
-            redirect_to_record(4);
+            redirect_to_record(4,$idm);
         }
     }
 }
@@ -97,12 +97,11 @@ function modifyMeeting($idm, $ida, $idc, $orario, $datameeting, $descrizione, $c
         //caso in cui venga aggiornato il record correttamente
         // redirect alla pagina modificameeting.php con confirm type 1
         // confirm => 1 => record aggiornato correttamente
-        header("location: modificameeting.php?confirm=1");
+        header("location: ../modificameeting.php?confirm=1");
         exit();
     } else {
         //caso in cui si verifica un errore nel tentativo di aggiornare il record
         // redirect alla pagina modificameeting.php con errror type 2
-        // error => 2=> record aggiornato correttamente
         redirect_to_meeting(2);
     }
 }
@@ -112,16 +111,16 @@ function modifyMeeting($idm, $ida, $idc, $orario, $datameeting, $descrizione, $c
  */
 function redirect_to_meeting($error)
 {
-    header("location: modificameeting.php?error=$error");
+    header("location: ../modificameeting.php?error=$error");
     exit();
 }
 
 /**
  * Metodo che effettua una redirect con errore nella richiesta GET alla pagina modificaRecord.php
  */
-function redirect_to_record($error)
+function redirect_to_record($error,$id)
 {
-    header("location: modificaRecord.php?error=$error");
+    header("location: ../modificaRecord.php?id=$id&error=$error");
     exit();
 }
 function getArrayOfAttribute($id)
@@ -150,4 +149,24 @@ function getArrayOfAttribute($id)
         // error => 1 => errore durante l'interrogazione del database, prodotto più di un record o zero
         redirect_to_meeting(1);
     }
+}
+
+
+function test_input($data)
+
+{
+
+    //rimozione spazi bianchi o caratteri predefiniti
+
+    $data = trim($data);
+
+    //rimozione backslash aggiunti con la funzione addslashes()
+
+    $data = stripslashes($data);
+
+    //conversione dei caratteri predefiniti in entità html
+
+    $data = htmlspecialchars($data);
+
+    return $data;
 }
