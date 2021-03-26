@@ -1,33 +1,27 @@
-.errorMessages{
+.errorMessages {
     color: red;
 }
 
-#container{
-
-    margin-top : 2%;
-
+#container {
+    margin-top: 2%;
 }
 
-.content{
-
-    margin-top : 3.2%;
-
+.content {
+    margin-top: 3.2%;
 }
 
-.divButton{
-    
+.divButton {
     padding: 16px;
-    background-color:#b3afaf57;
-    width : 16%;
+    background-color: #b3afaf57;
+    width: 16%;
     border-radius: 8px;
-
 }
+
 
 /* PER ESTETICA LINEA */
 
 .linea {
-
-    border:none;
+    border: none;
     height: 20px;
     width: 90%;
     height: 50px;
@@ -36,8 +30,8 @@
     box-shadow: 0 20px 20px -20px rgb(88, 85, 85);
     margin: -50px auto 10px;
     animation: gradientRiga 25s ease infinite;
-
 }
+
 
 /* BOTTONE EXIT */
 
@@ -54,7 +48,7 @@
     transition: all 0.5s;
     cursor: pointer;
     margin: 4px 2px;
-    text-align:center;
+    text-align: center;
 }
 
 #bottoneExit span {
@@ -66,8 +60,6 @@
 
 #bottoneExit:hover span {
     padding-right: 25px;
-
-
 }
 
 #bottoneExit:hover span:after {
@@ -75,14 +67,12 @@
     right: 0;
 }
 
-#bottoneExit:hover{
-
+#bottoneExit:hover {
     background-color: #b40009;
     color: white;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-
-
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+
 
 /* BOTTONI FORM */
 
@@ -99,7 +89,7 @@
     transition: all 0.5s;
     cursor: pointer;
     margin: 4px 2px;
-    text-align:center;
+    text-align: center;
 }
 
 #buttonForm span {
@@ -118,14 +108,12 @@
     right: 0;
 }
 
-#buttonForm:hover{
-
+#buttonForm:hover {
     background-color: #1b00b4a9;
     color: white;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
-
-
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
+
 
 /* INPUT TYPE TEXT */
 
@@ -138,6 +126,7 @@ input[type=text] {
     border: none;
     border-bottom: 2px solid #1b00b4a9;
 }
+
 
 /* TEXT AREA */
 
@@ -153,7 +142,8 @@ textarea {
     resize: none;
 }
 
-  /* SELECT */
+
+/* SELECT */
 
 select {
     width: auto;
@@ -162,6 +152,7 @@ select {
     border-radius: 4px;
     background-color: #f1f1f1;
 }
+
 
 /* INPUT TYPE EMAIL */
 
@@ -175,29 +166,27 @@ input[type=email] {
     border-bottom: 2px solid #1b00b4a9;
 }
 
+
 /* INPUT TYPE EMAIL */
 
-input[type=datetime-local] {
-
+#meeting-time {
     width: auto;
     padding: 12px 20px;
     border: 2px solid #1b00b4a9;
     border-radius: 4px;
 }
 
+
 /* Parte Responsive per schermi piccolissimi*/
-  @media screen and (max-width: 300px) {
+
+@media screen and (max-width: 300px) {
     #buttonForm {
         width: 100%;
-     }
-
-     #bottoneExit{
+    }
+    #bottoneExit {
         width: 100%;
-     }
-
-     .content{
-
-        margin-top : 5%;
-    
+    }
+    .content {
+        margin-top: 5%;
     }
 }

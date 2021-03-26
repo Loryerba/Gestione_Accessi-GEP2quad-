@@ -3,122 +3,169 @@
 <head>
     <title>Prenotazione appuntamento</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> <!-- FONT BELLO -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> <!-- FONT -->
     <script src="js/script.js"></script>
 
     <!-- FAVICON -->
 
-    <link rel="icon" type= “image/x-icon”  href="faviconFolder/favicon001.ico"/>
+    <link rel="icon" type=“image/x-icon” href="faviconFolder/favicon001.ico" />
 
 </head>
 
 <style>
+    body,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "Raleway", sans-serif
+    }
+</style>
 
-body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}  
-
-</style> 
-
-<body onload="loadPage()" style = "background-color: #59c0f349;">
+<body style="background-color: #59c0f349;">
     <center>
         <form action="validator/checkForm.php" onsubmit="return checkField()" name="meeting" id="meeting">
 
-        <div id = "container">
+            <div id="container">
 
-            <h2>Prenota un appuntamento</h2>
-            <br>
-            <hr class ="linea">
+                <h2>Prenota un appuntamento</h2>
+                <br>
+                <hr class="linea">
 
+                <div class="content">
 
-        
-        <div class = "content">
-        
-            <h4>Seleziona la data e l'ora desiderata:</h4>
-            <input type="datetime-local" id="meeting-time" name="meeting-time" min="2017-06-01T08:30">
+                    <h4>Seleziona la data desiderata:</h4>
+                    <input type="date" id="meeting-date" name="meeting-date" placeholder="Selezionare la data">
 
-            <h4>Inserisci un nominativo:</h4>
-            <input type="text" id="meeting-nameClient" name="meeting-nameClient" placeholder="Nome e cognome">
+                    <script>
+                        var today = new Date().toISOString().split('T')[0];
+                        document.getElementsByName("meeting-date")[0].setAttribute('min', today);
+                    </script>
 
-            <h4>Inserisci l'oggetto del meeting e una breve descrizione:</h4>
-            <input type="text" id="meeting-object" name="meeting-object" placeholder="Oggetto meeting">
-            <br><br>
+                    <h4>Seleziona l'ora desiderata</h4>
+                    <input type="time" id="meeting-time" name="meeting-time" placeholder="Inserire l'orario">
 
-            <textarea id="meeting-description" name="meeting-description" rows="4" cols="50" placeholder="Descrizione opzionale"></textarea>
+                    <h4>Inserisci un nominativo:</h4>
+                    <input type="text" id="meeting-nameClient" name="meeting-nameClient" placeholder="Nome e cognome">
 
-            <h4>Scegli l'impiegato interessato al meeting:</h4>
+                    <h4>Inserisci l'oggetto del meeting e una breve descrizione:</h4>
+                    <input type="text" id="meeting-object" name="meeting-object" placeholder="Oggetto meeting">
+                    <br><br>
 
-            <?php
-            include 'validator/connection.php';
-            $conn = connect('id16206619_dbaccessi');
+                    <textarea id="meeting-description" name="meeting-description" rows="4" cols="50" placeholder="Descrizione opzionale"></textarea>
 
-            if (!$conn) {
-                //Error connection
-                echo '<select id="meeting-employee" name="meeting-employee">
+                    <h4>Scegli l'impiegato interessato al meeting:</h4>
+
+                    <?php
+                    include 'validator/connection.php';
+                    $conn = connect('id16206619_dbaccessi');
+
+                    if (!$conn) {
+                        //Error connection
+                        echo '<select id="meeting-employee" name="meeting-employee">
                     <option value="Seleziona qualcuno">Errore nel caricamento degli impiegati, ricarica la pagina</option>
                 </select>';
-            } else {
-                echo '<select id="meeting-employee" name="meeting-employee">';
-                echo '<option value="Seleziona qualcuno">Seleziona un impiegato</option>';
+                    } else {
+                        echo '<select id="meeting-employee" name="meeting-employee">';
+                        echo '<option value="Seleziona qualcuno">Seleziona un impiegato</option>';
 
-                //Query
-                $sql = "SELECT * FROM Administrator";
+                        //Query
+                        $sql = "SELECT * FROM Administrator";
 
-                $result = $conn->query($sql);
+                        $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        $cognome = $row['Cognome'];
-                        $nome = $row['Nome'];
-                        $id = $row['Id_A'];
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                $cognome = $row['Cognome'];
+                                $nome = $row['Nome'];
+                                $id = $row['Id_A'];
 
-                        echo "<option value='$id'>$cognome</option>";
+                                echo "<option value='$id'>$cognome</option>";
+                            }
+                        } else {
+                            echo "<option value='Errore nel caricamento degli impiegati, ricarica la pagina' </option>";
+                        }
+                        echo "</select>";
                     }
-                } else {
-                    echo "<option value='Errore nel caricamento degli impiegati, ricarica la pagina' </option>";
-                }
-                echo "</select>";
-            }
-            ?>
+                    ?>
 
-            <h4>Inserisci un'e-mail per essere contattato successivamente:</h4>
-            <input type="email" id="meeting-emailClient" name="meeting-emailClient" placeholder="Email">
-            <br><br>
-            <button type="submit" name="submit-meeting" id ="buttonForm">Prenota l'appuntamento</button>
-            <button type="reset" id ="buttonForm">Reset</button>
-            <br>
+                    <h4>Inserisci un'e-mail per essere contattato successivamente:</h4>
+                    <input type="email" id="meeting-emailClient" name="meeting-emailClient" placeholder="Email">
+                    <br><br>
+                    <button type="submit" name="submit-meeting" id="buttonForm">Prenota l'appuntamento</button>
+                    <button type="reset" id="buttonForm">Reset</button>
+                    <br>
 
-        </div>
+                </div>
 
-        </div>
+            </div>
 
         </form>
 
         <?php
-        //Check login error
-            //Output errors
-            if (isset($_GET['error'])) {
-                echo "<h4 class = 'errorMessages'>$_GET[error]</h4>";
-            } else if(isset($_GET['ok'])){
-                echo "<h4>$_GET[ok]</h4>";
+        //Output errors
+        if (isset($_GET['error'])) {
+            switch ($_GET['error']) {
+                case 1:
+                    echo "<script>alert('Data del meeting non selezionata')</script>";
+                    break;
+                case 2:
+                    echo "<script>alert('É stato selezionato un giorno festivo')</script>";
+                    break;
+                case 3:
+                    echo "<script>alert('Nominativo non inserito')</script>";
+                    break;
+                case 4:
+                    echo "<script>alert('Nessun oggetto del meeting inserito')</script>";
+                    break;
+                case 5:
+                    echo "<script>alert('Nessun impiegato selezionato')</script>";
+                    break;
+                case 6:
+                    echo "<script>alert('Nessuna email inserita')</script>";
+                    break;
+                case 7:
+                    echo "<script>alert('Email non valida')</script>";
+                    break;
+                case 8:
+                    echo "<script>alert('Errore invio form, riprova')</script>";
+                    break;
+                case 9:
+                    echo "<script>alert('Errore invio email di richiesta, riprova')</script>";
+                    break;
+                case 10:
+                    echo "<script>alert('Compila tutti i campi')</script>";
+                    break;
+                case 11:
+                    echo "<script>alert('Seleziona un orario tra le 08:00 e le 17:30')</script>";
+                    break;
+                case 12:
+                    echo "<script>alert('Ora del meeting non selezionata')</script>";
+                    break;
             }
+        }
+
+        //"Ok" messages
+        if (isset($_GET['ok'])) {
+            switch ($_GET['ok']) {
+                case 1:
+                    echo "<script>alert('Email inviata')</script>";
+                    break;
+            }
+        }
         ?>
 
-
-        <div class = "divButton">
-
-        <!--<a href="../index.php"><button>Esci</button></a>-->
         <p> <button onclick="window.location.href='../index.php'" id="bottoneExit"> Esci </button></p>
-        
 
-        <br>
-
-        </div>
-        
         <br>
         <br>
 
     </center>
 
-    
+
 
 </body>
+
 </html>
