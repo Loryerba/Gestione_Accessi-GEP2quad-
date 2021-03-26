@@ -3,7 +3,7 @@
 <head>
     <title>Prenotazione appuntamento</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> <!-- FONT BELLO -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> <!-- FONT -->
     <script src="js/script.js"></script>
 
     <!-- FAVICON -->
@@ -24,9 +24,9 @@
     }
 </style>
 
-<body onload="loadPage()" style="background-color: #59c0f349;">
+<body style="background-color: #59c0f349;">
     <center>
-        <form action="validator/checkForm.php" onsubmit="return checkFiel()" name="meeting" id="meeting">
+        <form action="validator/checkForm.php" onsubmit="return checkField()" name="meeting" id="meeting">
 
             <div id="container">
 
@@ -34,12 +34,18 @@
                 <br>
                 <hr class="linea">
 
-
-
                 <div class="content">
 
-                    <h4>Seleziona la data e l'ora desiderata:</h4>
-                    <input type="datetime-local" id="meeting-time" name="meeting-time" min="2017-06-01T08:30">
+                    <h4>Seleziona la data desiderata:</h4>
+                    <input type="date" id="meeting-date" name="meeting-date" placeholder="Selezionare la data">
+
+                    <script>
+                        var today = new Date().toISOString().split('T')[0];
+                        document.getElementsByName("meeting-date")[0].setAttribute('min', today);
+                    </script>
+
+                    <h4>Seleziona l'ora desiderata</h4>
+                    <input type="time" id="meeting-time" name="meeting-time" placeholder="Inserire l'orario">
 
                     <h4>Inserisci un nominativo:</h4>
                     <input type="text" id="meeting-nameClient" name="meeting-nameClient" placeholder="Nome e cognome">
@@ -103,7 +109,7 @@
         if (isset($_GET['error'])) {
             switch ($_GET['error']) {
                 case 1:
-                    echo "<script>alert('Data e ora del meeting non selezionate')</script>";
+                    echo "<script>alert('Data del meeting non selezionata')</script>";
                     break;
                 case 2:
                     echo "<script>alert('É stato selezionato un giorno festivo')</script>";
@@ -124,16 +130,19 @@
                     echo "<script>alert('Email non valida')</script>";
                     break;
                 case 8:
-                    echo "<script>alert('Errore nell'invio del form, riprova')</script>";
+                    echo "<script>alert('Errore invio form, riprova')</script>";
                     break;
                 case 9:
-                    echo "<script>alert('Errore nell'invio dell'email di richiesta, riprova')</script>";
+                    echo "<script>alert('Errore invio email di richiesta, riprova')</script>";
                     break;
                 case 10:
                     echo "<script>alert('Compila tutti i campi')</script>";
                     break;
                 case 11:
                     echo "<script>alert('Seleziona un orario tra le 08:00 e le 17:30')</script>";
+                    break;
+                case 12:
+                    echo "<script>alert('Ora del meeting non selezionata')</script>";
                     break;
             }
         }
@@ -142,7 +151,7 @@
         if (isset($_GET['ok'])) {
             switch ($_GET['ok']) {
                 case 1:
-                    echo "<script>alert('Email inviata con successo')</script>";
+                    echo "<script>alert('Email inviata')</script>";
                     break;
             }
         }

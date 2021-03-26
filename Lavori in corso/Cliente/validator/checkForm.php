@@ -4,9 +4,8 @@ session_start();
 //Check get
 if (isset($_GET['submit-meeting'])) {
     //Get values from method GET
+    $meetingDate = $_GET["meeting-date"];
     $meetingTime = $_GET["meeting-time"];
-
-
     $name = $_GET["meeting-nameClient"];
     $meetingObject = $_GET["meeting-object"];
     $meetingDescription = $_GET["meeting-description"];
@@ -14,11 +13,16 @@ if (isset($_GET['submit-meeting'])) {
     $meetingEmailClient = $_GET["meeting-emailClient"];
 
     //Check values
-    if (($meetingTime == "") || ($meetingTime == null)) {
+    if (($meetingDate == "") || ($meetingDate == null)) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=1");
         exit();
-    } else if ((date('l', strtotime($meetingTime)) == 'Sunday') || (date('l', strtotime($meetingTime)) == 'Saturday')) {
+    }else if(($meetingTime == "") || ($meetingTime == null)){
+        //Return to 'AccessoOspite.php'
+        header("Location: ../AccessoOspite.php?error=12");
+        exit();
+    } 
+    else if ((date('l', strtotime($meetingDate)) == 'Sunday') || (date('l', strtotime($meetingDate)) == 'Saturday')) {
         //Return to 'AccessoOspite.php'
         header("Location: ../AccessoOspite.php?error=2");
         exit();
@@ -61,7 +65,7 @@ if (isset($_GET['submit-meeting'])) {
                 $nome = $row['Nome'];
                 $cognome = $row['Cognome'];
             }
-
+            
             if (!(($_GET["meeting-description"] == "") || ($_GET["meeting-description"] == null))) {
                 $_SESSION['descrizioneMeeting'] = $_GET["meeting-description"];
             }
@@ -71,7 +75,8 @@ if (isset($_GET['submit-meeting'])) {
             $_SESSION['emailCliente'] = $meetingEmailClient;
             $_SESSION['nominativoAdmin'] = $meetingEmployee;
             $_SESSION['emailAdmin'] = $emailAdmin;
-            $_SESSION['dataora'] = $meetingTime;
+            $_SESSION['ora'] = $meetingTime;
+            $_SESSION['data'] = $meetingDate;
 
             header("Location: sendEmail.php");
             exit();
@@ -86,28 +91,11 @@ if (isset($_GET['submit-meeting'])) {
 //Check if the event's time is correct
 function checkTime($temp)
 {
-    $dt = new DateTime($temp);
-    $date = $dt->format('d-m-Y');
-    $time = $dt->format('h:i A');
-
-    //Check if the hour are 12
-    $time1 = $dt->format('h:i');
-    $temp = explode(":", $time1);
-    $t = intval($temp[0]);
-
-    if ((strpos($time, "PM")) && ($t != 12)) {
-        $time = $dt->format('h:i');
-        $temp = explode(":", $time);
-        $t = intval($temp[0]);
-        $t += 12;
-        $time = $t . ":" . $temp[1];
-    }
-
     $orarioapertura = new DateTime("08:00");
     $orariochiusura = new DateTime("17:30");
-    $orario = new DateTime($time);
+    $orario = new DateTime($temp);
 
-    if ($orario >= $orarioapertura && $orario <= $orariochiusura) {
+    if ($orario >= $orarioapertura && $orario <= $orariochiusura) {   
         return true;
     } else {
         return false;
