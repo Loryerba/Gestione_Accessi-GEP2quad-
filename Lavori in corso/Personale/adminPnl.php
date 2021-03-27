@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
     //redirect alla pagina 1
     redirect("7");
-} else if (time() - $_SESSION['timesetted'] > 10) {
+} else if (time() - $_SESSION['timesetted'] > 100000000) {
     //eliminazione della sessione timesetted
     unset($_SESSION['timesetted']);
     //eliminazione della sessione user

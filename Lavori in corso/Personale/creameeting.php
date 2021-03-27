@@ -101,14 +101,14 @@ function redirect($errortype)
             <h1> Crea meeting</h1>
             <!-- Blocco inserimento dati dell'admin -->
 
-            <p> Email Admin <input type="email" name="n_ademail" id="i_ademail" placeholder="Inserire la mail dell'admin" value="<?php if (isset($_SESSION['emaila'])) echo $_SESSION['emaila'] ?>" disabled> </p>
+            <p> Email Admin <input type="email" name="n_ademail" id="i_ademail" placeholder="Inserire la mail dell'admin" value="<?php if (isset($_SESSION['emaila'])) echo $_SESSION['emaila'] ?>"> </p>
 
             <input type="button" name="n_showrbrica" id="i_showrubrica" onclick="window.location.href='visualizzaRubricaAdmin.php'" value="Visualizza la rubrica"> </input>
             <input type="button" name="n_insertbrica" id="i_insertrubrica" onclick="window.location.href='inserisciRubricaAdmin.php'" value="Inserisci nella rubrica"> </input>
 
             <!-- Blocco inserimento dati del cliente -->
 
-            <p> Email Cliente <input type="email" name="n_clemail" id="i_clemail" placeholder="Inserire la mail del cliente" value="<?php if (isset($_SESSION['emailp'])) echo $_SESSION['emailp'] ?>" disabled> </p>
+            <p> Email Cliente <input type="email" name="n_clemail" id="i_clemail" placeholder="Inserire la mail del cliente" value="<?php if (isset($_SESSION['emailp'])) echo $_SESSION['emailp'] ?>"> </p>
 
             <input type="button" name="n_showrbricac" id="i_showrubricac" onclick="window.location.href='visualizzaRubricaCliente.php'" value="Visualizza la rubrica"></input>
             <input type="button" name="n_insertbricac" id="i_insertrubricac" onclick="window.location.href='inserisciRubricaCliente.php'" value="Inserisci nella rubrica"> </input>

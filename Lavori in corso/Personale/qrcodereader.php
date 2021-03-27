@@ -112,7 +112,7 @@ function warnAdmin($conn, $nomep, $cognomep, $emaila)
     $mail->Port = '465';
     $mail->isHTML();
     $mail->Username = "lorenzoerba250@gmail.com";
-    $mail->Password = 'Portocesareo25';
+    $mail->Password = '';
     $mail->Subject = 'Cliente arrivato.';
     $mail->Body = "<p> Il cliente $cognomep $nomep ha appena effettuato l'accesso in azienda</p>";
     $mail->addAddress('cestinodirete@gmail.com');

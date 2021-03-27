@@ -186,7 +186,7 @@ function sendEmail($conn, $data, $ora, $lastid)
     $mail->Port = '465';
     $mail->isHTML();
     $mail->Username = 'lorenzoerba250@gmail.com';
-    $mail->Password = 'Portocesareo25';
+    $mail->Password = '';
     $mail->Subject = 'Meeting presso L2GM';
     $mail->Body = "<p> Spettabile Cliente, e' stato realizzato un meeting per il <b>$data</b> alle ore <b>$ora</b> presso la sede L2GM di Barlassina, via Giovanni Segantini 5.</p>
                     <img src='$src'>
