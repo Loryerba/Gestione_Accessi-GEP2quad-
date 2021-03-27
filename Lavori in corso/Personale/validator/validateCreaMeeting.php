@@ -4,6 +4,7 @@ if (!isset($_SESSION)) {
 }
 //Require class phpmailer
 require_once('phpmailer/PHPMailerAutoload.php');
+require_once 'qrcode.class.php';
 include 'connection.php';
 $dbname = "id16206619_dbaccessi";
 $apertura = "08:00";
@@ -131,38 +132,14 @@ function addMeeting($ida, $idc, $orario, $datameeting, $descrizione, $conn)
     $orario = $orario->format('H:i');
     // query per inserire nel database il meeting
     $sql = "INSERT INTO Meeting (DataM,OraM,Id_A,Id_P,Descrizione) VALUES ('$datameeting', '$orario', '$ida', '$idc', '$descrizione')";
+
     // esecuzione della query
     if ($conn->query($sql)) {
+        $lastid = $conn->insert_id;
         //registrazione del log
         updateLog($conn);
         //funzione che invia la mail col qr code
-
-
-        //Create e-mail
-        $mail = new PHPMailer();
-        $mail->isSMTP();
-        $mail->SMTPAuth = true;
-        $mail->SMTPSecure = 'ssl';
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = '465';
-        $mail->isHTML();
-        $mail->Username = 'lorenzoerba250@gmail.com';
-        $mail->Password = 'Portocesareo25';
-        $mail->Subject = 'Hi';
-        $mail->Body = '<h1>prova erba ada2</h1> 
-                <p>ciao</p>';
-        $mail->addAddress('cestinodirete@gmail.com');
-        //Send
-        //se l'invio della mail ha prodotto errori
-        // redirect alla pagina index con error type = 8
-        // error => 8 => Errore durante l'invio della mail
-        if (!$mail->send()) {
-            $conn->close();
-            redirect(8);
-        } else {
-            $conn->close();
-            goback();
-        }
+        sendEmail($conn, $datameeting, $orario, $lastid);
     } else {
         // caso in cui avviene un errore nell'inserimento nel database
         // redirect alla pagina creameeting.php con errror type = 6
@@ -192,5 +169,39 @@ function updateLog($conn)
         // error => 7 => Errore durante l'interrogazione del database per log
         $conn->close();
         redirect(7);
+    }
+}
+
+
+function sendEmail($conn, $data, $ora, $lastid)
+{
+    $qrcode = new QRCode();
+    $src = $qrcode->getQrCodeUrl("https://dbaccessi.000webhostapp.com/ProgettoPrimoPrototipo/Personale/qrcodereader.php?idm=$lastid", 300, 300, "UTF-8", "H");
+    //Create e-mail
+    $mail = new PHPMailer();
+    $mail->isSMTP();
+    $mail->SMTPAuth = true;
+    $mail->SMTPSecure = 'ssl';
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Port = '465';
+    $mail->isHTML();
+    $mail->Username = 'lorenzoerba250@gmail.com';
+    $mail->Password = '';
+    $mail->Subject = 'Meeting presso L2GM';
+    $mail->Body = "<p> Spettabile Cliente, e' stato realizzato un meeting per il <b>$data</b> alle ore <b>$ora</b> presso la sede L2GM di Barlassina, via Giovanni Segantini 5.</p>
+                    <img src='$src'>
+                    <p> Scansiona il codice QR soprastante all'ingresso dell'azienda per l'accesso. Al momento dell'uscita scansiona lo stesso codice per uscire dall'azienda.</p>
+                    <p> Per maggiori informazioni contattaci alla mail: info@l2gm.it oppure visita il nostro sito https://www.l2gm.eu/ </p>";
+    $mail->addAddress('cestinodirete@gmail.com');
+    //Send
+    //se l'invio della mail ha prodotto errori
+    // redirect alla pagina index con error type = 8
+    // error => 8 => Errore durante l'invio della mail
+    if (!$mail->send()) {
+        $conn->close();
+        redirect(8);
+    } else {
+        $conn->close();
+        goback();
     }
 }

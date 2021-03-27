@@ -17,6 +17,7 @@ if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
     redirect("7");
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////12345
 
 /**
  * error get type
@@ -43,9 +44,9 @@ if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
 if (isset($_GET["error"]) && $_GET["error"] == 1) {
     echo "<script> alert('Compilare tutti i campi') </script>";
 } else if (isset($_GET['error']) && $_GET['error'] == 2) {
-    echo "<script> alert('Error administrator query.')</script>";
+    echo "<script> alert('Email amministratore non presente nel database.')</script>";
 } else if (isset($_GET['error']) && $_GET['error'] == 3) {
-    echo "<script> alert('Error client query.')</script>";
+    echo "<script> alert('Email cliente non presente nel database..')</script>";
 } else if (isset($_GET['error']) && $_GET['error'] == 4) {
     echo "<script> alert('Orario inserito non valido.')</script>";
 } else if (isset($_GET['error']) && $_GET['error'] == 5) {
@@ -58,8 +59,21 @@ if (isset($_GET["error"]) && $_GET["error"] == 1) {
     echo "<script> alert('Error trying sending mail.')</script>";
 } else if (isset($_GET['confirm']) && $_GET['confirm'] == 1) {
     echo "<script> alert('Meeting creato con successo.') </script>";
+} else if (isset($_GET['confirm']) && $_GET['confirm'] == 2) {
+    echo "<script> alert('Amministratore aggiunto con successo.') </script>";
+} else if (isset($_GET['confirm']) && $_GET['confirm'] == 3) {
+    echo "<script> alert('Cliente aggiunto con successo.') </script>";
 }
-
+if (isset($_GET['emaila'])) {
+    $_SESSION['emaila'] = $_GET['emaila'];
+} else {
+    unset($_SESSION['emaila']);
+}
+if (isset($_GET['emailp'])) {
+    $_SESSION['emailp'] = $_GET['emailp'];
+} else {
+    unset($_SESSION['emailp']);
+}
 
 function redirect($errortype)
 {
@@ -87,17 +101,17 @@ function redirect($errortype)
             <h1> Crea meeting</h1>
             <!-- Blocco inserimento dati dell'admin -->
 
-            <p> Email Admin <input type="email" name="n_ademail" id="i_ademail" placeholder="Inserire la mail dell'admin"> </p>
+            <p> Email Admin <input type="email" name="n_ademail" id="i_ademail" placeholder="Inserire la mail dell'admin" value="<?php if (isset($_SESSION['emaila'])) echo $_SESSION['emaila'] ?>"> </p>
 
-            <button name="n_showrbrica" id="i_showrubrica"> Visualizza la rubrica </button>
-            <button name="n_insertbrica" id="i_insertrubrica"> Inserisci nella rubrica </button>
+            <input type="button" name="n_showrbrica" id="i_showrubrica" onclick="window.location.href='visualizzaRubricaAdmin.php'" value="Visualizza la rubrica"> </input>
+            <input type="button" name="n_insertbrica" id="i_insertrubrica" onclick="window.location.href='inserisciRubricaAdmin.php'" value="Inserisci nella rubrica"> </input>
 
             <!-- Blocco inserimento dati del cliente -->
 
-            <p> Email Cliente <input type="email" name="n_clemail" id="i_clemail" placeholder="Inserire la mail del cliente"> </p>
+            <p> Email Cliente <input type="email" name="n_clemail" id="i_clemail" placeholder="Inserire la mail del cliente" value="<?php if (isset($_SESSION['emailp'])) echo $_SESSION['emailp'] ?>"> </p>
 
-            <button name="n_showrbricac" id="i_showrubricac"> Visualizza la rubrica </button>
-            <button name="n_insertbricac" id="i_insertrubricac"> Inserisci nella rubrica </button>
+            <input type="button" name="n_showrbricac" id="i_showrubricac" onclick="window.location.href='visualizzaRubricaCliente.php'" value="Visualizza la rubrica"></input>
+            <input type="button" name="n_insertbricac" id="i_insertrubricac" onclick="window.location.href='inserisciRubricaCliente.php'" value="Inserisci nella rubrica"> </input>
             <!-- Inserimento della descrizione del meeting -->
             <p> Descrizione: <textarea maxlength="100" rows="7" cols="40" required name="n_descrizione"> </textarea></p>
             <!-- Inserimento della data del meeting -->

@@ -28,11 +28,14 @@ if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
 
 
 //ottengo la tabella contenente i meeting
-$table = "<tr> <th>Data Meeting</th> <th>Ora Meeting</th> <th> Email dell'amministratore</th> <th> Email del partecipante</th> <th> Descrizione </th></tr>";
-$table .= getTableIndex();
+$header = "<tr> <th>Data Meeting</th> <th>Ora Meeting</th> <th> Email dell'amministratore</th> <th> Email del partecipante</th> <th> Descrizione </th></tr>";
+$table = getTableIndex();
 //stampo una stringa nel caso in cui non vi siano dei record da stampare
 if ($table == "notable") {
     $table = "<h3>Non ci sono record da visualizzare per la modifica.</h3>";
+}
+else{
+    $table = $header . $table;
 }
 
 /**
@@ -43,6 +46,8 @@ if ($table == "notable") {
  * error => 1 => errore durante l'interrogazione del database, prodotto più di un record o zero
  * 
  * error => 2=> record aggiornato correttamente
+ * 
+ * error => 7 => Errore durante l'interrogazione del database per log
  */
 if (isset($_GET["confirm"]) && $_GET["confirm"] == 1) {
     echo "<script> alert('Modifica avvenuta con successo') </script>";
@@ -50,6 +55,9 @@ if (isset($_GET["confirm"]) && $_GET["confirm"] == 1) {
     echo "<script> alert('Error getting record meeting') </script>";
 } else if (isset($_GET["error"]) && $_GET["error"] == 2) {
     echo "<script> alert('Error executing query') </script>";
+}
+else if(isset($_GET["error"]) && $_GET["error"] == 7) {
+    echo "<script> alert('Error log query.') </script>";
 }
 
 function redirect($errortype)

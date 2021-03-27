@@ -1,7 +1,7 @@
 <?php
 
+// includo il file per ottenere la tabella dei meeting
 include 'validator/getMeetingTable.php';
-
 //faccio partire le sessioni per la gestione del logged in dell'utente
 if (!isset($_SESSION)) {
     session_start();
@@ -26,58 +26,44 @@ if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//ottengo la tabella contenente i log
-$header = "<tr> <th>Id_L</th><th>Ora</th> <th>Data</th> <th>Descrizione</th> <th>Id_A</th></tr>";
-$table = getLogTable();
+
+
+//ottengo la tabella contenente i meeting
+$header = "<tr> <th>Nome</th> <th>Cognome</th> <th> Email dell'amministratore</th><th>Seleziona</th></tr>";
+$table = getRubricaAmministratore();
 //stampo una stringa nel caso in cui non vi siano dei record da stampare
 if ($table == "notable") {
-    $table = "<h3>Non ci sono log.</h3>";
-} else {
+    $table = "<h3>Non ci sono record da visualizzare per la rubrica.</h3>";
+}
+else{
     $table = $header . $table;
 }
 
-function redirect($errortype)
-{
-
-    header("location: login.php?error=$errortype");
-
-    exit();
-}
 
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Visualizza Log</title>
+    <title>Rubrica Amministratore</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
 </head>
-
 <body>
     <center>
-        <h1> Visualizza Log</h1>
+    <h1> Rubrica Personale</h1>
+    <table>
 
-        <table>
-            <!-- Stampa della query i log d'accesso-->
-            <?php
-
+    <?php if(isset($table))
             echo $table;
             ?>
-        </table>
 
-
+    </table>
     </center>
-
     <footer>
-
-        <button id="i_bback" name="n_bback" onclick="window.location.href='visualizza.php'"> Indietro </button>
+        <button onclick="window.location.href='creameeting.php'"> Indietro</button>
 
     </footer>
 </body>
-
 </html>
