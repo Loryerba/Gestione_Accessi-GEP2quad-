@@ -47,17 +47,13 @@ if (isset($_GET["id"])) {
  */
 if (isset($_GET["error"]) && $_GET["error"] == 1) {
     echo "<script> alert('Compilare tutti i campi') </script>";
-}
-else if(isset($_GET["error"]) && $_GET["error"] == 2){
+} else if (isset($_GET["error"]) && $_GET["error"] == 2) {
     echo "<script> alert('Errore durante l'interrogazione al database per amministratore') </script>";
-}
-else if(isset($_GET["error"]) && $_GET["error"] == 3){
+} else if (isset($_GET["error"]) && $_GET["error"] == 3) {
     echo "<script> alert('Errore durante l'interrogazione al database per cliente') </script>";
-}
-else if(isset($_GET["error"]) && $_GET["error"] == 4){
+} else if (isset($_GET["error"]) && $_GET["error"] == 4) {
     echo "<script> alert('Oraio non valido') </script>";
-}
-else if(isset($_GET["error"]) && $_GET["error"] == 5){
+} else if (isset($_GET["error"]) && $_GET["error"] == 5) {
     echo "<script> alert('Data non valida') </script>";
 }
 

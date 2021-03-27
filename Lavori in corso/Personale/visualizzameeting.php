@@ -1,3 +1,53 @@
+<?php
+
+
+include 'validator/getMeetingTable.php';
+
+//faccio partire le sessioni per la gestione del logged in dell'utente
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+/**
+ * Controllo se l'utente si è loggato prima di accedere a tale pagina e se non rimane in afk
+ */
+if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
+    //redirect alla pagina 1
+    redirect("7");
+} else if (time() - $_SESSION['timesetted'] > 1000000) {
+    //eliminazione della sessione timesetted
+    unset($_SESSION['timesetted']);
+    //eliminazione della sessione user
+    unset($_SESSION['user']);
+    //eliminazione della sessione logged
+    unset($_SESSION['logged']);
+    //redirect alla pagina 1
+    redirect("7");
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//ottengo la tabella contenente i meeting
+$header = "<tr> <th>Data Meeting</th> <th>Ora Meeting</th> <th> Email dell'amministratore</th> <th> Email del partecipante</th> <th>Descrizione</th> </tr>";
+$table = getMeetingTable();
+//stampo una stringa nel caso in cui non vi siano dei record da stampare
+if ($table == "notable") {
+    $table = "<h3>Non ci sono clienti in azienda.</h3>";
+}
+else{
+    $table = $header . $table;
+}
+
+function redirect($errortype)
+{
+
+    header("location: login.php?error=$errortype");
+
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -16,14 +66,11 @@
 
         <table>
             <!-- Stampa della query contenente i meeting futuri-->
+            <?php
+        //Stampa della query contenente i record in mep con orario settato e uscita no
+        echo $table;
+        ?>
         </table>
-
-        <select name="n_sfilter" id="i_sfilter">
-            <option value="Data crescente"> Data Crescente</option>
-            <option value="Data decrescente"> Data Decrescente </option>
-            <option value="Ultimi 10"> Ultimi 10 </option>
-            <option value="Ultimi 20"> ultimi 20</option>
-        </select>
 
     </center>
 

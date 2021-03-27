@@ -55,10 +55,9 @@ if (empty($_POST['n_username'])) {
         redirect(3);
     } else {
 
-        // salvataggio della password con criptaggio di base
+        // salvataggio della password
 
-        $password = password_hash(test_input($_POST['n_password']), PASSWORD_DEFAULT);
-
+        $password = test_input($_POST['n_password']);
 
         $conn = connect($dbname);
 
@@ -77,6 +76,8 @@ if (empty($_POST['n_username'])) {
 
             // esecuzione della query
 
+           
+
             $result = $conn->query($sql);
 
             // flag booleano per il controllo dei dati inseriti
@@ -88,9 +89,10 @@ if (empty($_POST['n_username'])) {
             if ($result->num_rows > 0) {
 
                 while ($row = $result->fetch_assoc()) {
-
-                    if ($mail == $row['Email'] && password_verify($row['Password_'], $password) == 1) {
-
+ 
+                    if ($mail == $row['Email'] && password_verify($password, $row['Password_'])) {
+                        
+                        
                         //setting del flag booleano a true
 
                         //tale setting permetterà di verificare che l'utente è stato riconosciuto

@@ -1,14 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Stampa meeting</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
-    <script src='main.js'></script>
-</head>
-<body>
-    
-</body>
-</html>
+<?php
+include 'validator/getMeetingTable.php';
+
+    $myfile = fopen("meeting.csv", "w") or die("Unable to open file!");
+    $csv = getMeetingCsv();
+    fwrite($myfile, $csv);
+    fclose($myfile);
+    $filename = "meeting.csv";
+    header("Content-disposition: attachment;filename=$filename");
+    readfile($filename);

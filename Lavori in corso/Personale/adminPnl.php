@@ -7,7 +7,7 @@ if (!isset($_SESSION)) {
 if (!isset($_SESSION['user']) || !$_SESSION['logged'] = true) {
     //redirect alla pagina 1
     redirect("7");
-} else if (time() - $_SESSION['timesetted'] > 1000000) {
+} else if (time() - $_SESSION['timesetted'] > 10) {
     //eliminazione della sessione timesetted
     unset($_SESSION['timesetted']);
     //eliminazione della sessione user
@@ -70,21 +70,20 @@ function redirect($errortype)
 
         .w3-bar .w3-button {
 
-        display: block;
-        padding: 0px;
+            display: block;
+            padding: 0px;
 
-        border-bottom: 2px solid transparent;
+            border-bottom: 2px solid transparent;
 
-        transition: border-bottom-color 0.5s ease-out;
-        -webkit-transition: border-bottom-color 0.5s ease-out;
+            transition: border-bottom-color 0.5s ease-out;
+            -webkit-transition: border-bottom-color 0.5s ease-out;
         }
 
 
         .w3-button:hover {
-        color: blue;
-        border-bottom-color: blue;    
-        } 
-
+            color: blue;
+            border-bottom-color: blue;
+        }
     </style>
 
 </head>
@@ -171,18 +170,18 @@ function redirect($errortype)
 
         <div class="box">
 
-        <!-- BOTTONE ESCI -->
+            <!-- BOTTONE ESCI -->
 
-        <h2><i class="fa fa-sign-out"></i></h2>
-        <h3>Esci</h3>
-        <p>Seleziona "Esci" per tornare alla schermata
-            <br>del login.
-        </p>
+            <h2><i class="fa fa-sign-out"></i></h2>
+            <h3>Esci</h3>
+            <p>Seleziona "Esci" per tornare alla schermata
+                <br>del login.
+            </p>
 
-        <button class="bottone" onclick="window.location.href='login.php'"> Esci</button>
+            <button class="bottone" onclick="window.location.href='login.php'"> Esci</button>
 
         </div>
-        
+
 
     </div>
 

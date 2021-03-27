@@ -1,7 +1,8 @@
 <?php
 include 'connection.php';
-
-
+if (!isset($_SESSION)) {
+    session_start();
+}
 $dbname = "id16206619_dbaccessi";
 $apertura = "08:00";
 $chiusura = "17:30";
@@ -15,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //caso in cui alcuni campi sono vuoti
         //redirect alla pagina modificaRecord.php con error type = 1
         // errror => 1 => Compilare tutti i campi
-        redirect_to_record(1,$idm);
+        redirect_to_record(1, $idm);
     } else {
         //controllo se l'orario inserito è corretto
         $orario = new DateTime($_POST['oram']);
@@ -51,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $idc = $row['Id_P'];
                         // ottengo la descrizione del meeting
                         $descrizione = $_POST['descrizione'];
-                        
+
                         modifyMeeting($idm, $ida, $idc, $orario, $datameeting, $descrizione, $conn);
                     } else {
 
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         // caso in cui vengono prodotti più risultati di 1 oppure nessun risultato
                         // redirect alla pagina modificaRecord.php con error type = 3
                         // error => 3 => Errore durante l'interrogazione al database per cliente
-                        redirect_to_record(3,$idm);
+                        redirect_to_record(3, $idm);
                     }
                 } else {
                     // chiusura connessione al database
@@ -68,19 +69,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // caso in cui vengono prodotti più risultati di 1 oppure nessun risultato
                     // redirect alla pagina modificaRecord.php con error type = 2
                     // error => 2 => Errore durante l'interrogazione al database per amministratore
-                    redirect_to_record(2,$idm);
+                    redirect_to_record(2, $idm);
                 }
             } else {
                 // caso in cui viene selezionata una data non valida
                 // redirect alla pagina modificaRecord.php con error type = 5
                 // error => 5 => Data non valida
-                redirect_to_record(5,$idm);
+                redirect_to_record(5, $idm);
             }
         } else {
             // caso in cui viene inserito un orario che non rientra in quello valido
             // redirect alla pagina modificaRecord.php con errror type = 4
             // error => 4 => Oraio non valido
-            redirect_to_record(4,$idm);
+            redirect_to_record(4, $idm);
         }
     }
 }
@@ -94,6 +95,8 @@ function modifyMeeting($idm, $ida, $idc, $orario, $datameeting, $descrizione, $c
     $sql = "UPDATE Meeting SET DataM='$datameeting',OraM='$orario',Id_A='$ida',Id_P='$idc',Descrizione='$descrizione' WHERE Id_M='$idm'";
     //interrogazione al database
     if ($conn->query($sql)) {
+        //registrazione del log
+        updateLog($conn, $idm);
         //caso in cui venga aggiornato il record correttamente
         // redirect alla pagina modificameeting.php con confirm type 1
         // confirm => 1 => record aggiornato correttamente
@@ -118,7 +121,7 @@ function redirect_to_meeting($error)
 /**
  * Metodo che effettua una redirect con errore nella richiesta GET alla pagina modificaRecord.php
  */
-function redirect_to_record($error,$id)
+function redirect_to_record($error, $id)
 {
     header("location: ../modificaRecord.php?id=$id&error=$error");
     exit();
@@ -169,4 +172,26 @@ function test_input($data)
     $data = htmlspecialchars($data);
 
     return $data;
+}
+
+function updateLog($conn, $idm)
+{
+    //ottengo l'orario attuale
+    $time = new DateTime('now', new DateTimeZone('Europe/Rome'));
+    $time = $time->format('H:i');
+    //ottengo la data attuale
+    $date = new DateTime('now', new DateTimeZone('Europe/Rome'));
+    $date = $date->format("Y-m-d");
+    // descrizione del log
+    $description = "Administrator modified a meeting where id meeting is $idm";
+    $id = $_SESSION['idadmin'];
+    // query per inserire nel database il  log
+    $sql = "INSERT INTO Logs (OraL,DataL,Descrizione,Id_A) VALUES ('$time', '$date', '$description', $id)";
+    if ($conn->query($sql) == FALSE) {
+        // caso in cui avviene un errore nell'inserimento nel database
+        // redirect alla pagina creameeting.php con errror type = 7
+        // error => 7 => Errore durante l'interrogazione del database per log
+        $conn->close();
+        redirect_to_meeting(7);
+    }
 }
