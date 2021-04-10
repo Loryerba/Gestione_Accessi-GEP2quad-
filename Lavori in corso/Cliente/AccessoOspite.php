@@ -3,11 +3,10 @@
 <head>
     <title>Prenotazione appuntamento</title>
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> <!-- FONT -->
+    <!-- FONT -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <script src="js/script.js"></script>
-
     <!-- FAVICON -->
-
     <link rel="icon" type=“image/x-icon” href="faviconFolder/favicon001.ico" />
 
 </head>
@@ -20,26 +19,24 @@
     h4,
     h5,
     h6 {
-        font-family: "Raleway", sans-serif
+        font-family: "Raleway", sans-serif;
     }
 </style>
 
 <body style="background-color: #59c0f349;">
     <center>
         <form action="validator/checkForm.php" onsubmit="return checkField()" name="meeting" id="meeting">
-
             <div id="container">
-
                 <h2>Prenota un appuntamento</h2>
                 <br>
                 <hr class="linea">
-
                 <div class="content">
-
+                    <!-- FORM -->
                     <h4>Seleziona la data desiderata:</h4>
                     <input type="date" id="meeting-date" name="meeting-date" placeholder="Selezionare la data">
 
                     <script>
+                        //Set attribute min today to input date
                         var today = new Date().toISOString().split('T')[0];
                         document.getElementsByName("meeting-date")[0].setAttribute('min', today);
                     </script>
@@ -59,6 +56,7 @@
                     <h4>Scegli l'impiegato interessato al meeting:</h4>
 
                     <?php
+                    //Connect to db to get the administrators
                     include 'validator/connection.php';
                     $conn = connect('id16206619_dbaccessi');
 
@@ -76,7 +74,9 @@
 
                         $result = $conn->query($sql);
 
+                        //Check result
                         if ($result->num_rows > 0) {
+                            //Out all the administrators
                             while ($row = $result->fetch_assoc()) {
                                 $cognome = $row['Cognome'];
                                 $nome = $row['Nome'];
@@ -97,11 +97,8 @@
                     <button type="submit" name="submit-meeting" id="buttonForm">Prenota l'appuntamento</button>
                     <button type="reset" id="buttonForm">Reset</button>
                     <br>
-
                 </div>
-
             </div>
-
         </form>
 
         <?php
@@ -147,7 +144,7 @@
             }
         }
 
-        //"Ok" messages
+        //Output "ok" messages
         if (isset($_GET['ok'])) {
             switch ($_GET['ok']) {
                 case 1:
@@ -156,16 +153,10 @@
             }
         }
         ?>
-
         <p> <button onclick="window.location.href='../index.php'" id="bottoneExit"> Esci </button></p>
-
         <br>
         <br>
-
     </center>
-
-
-
 </body>
 
 </html>
