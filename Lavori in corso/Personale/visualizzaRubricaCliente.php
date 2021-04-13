@@ -49,10 +49,68 @@ else{
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Rubrica Cliente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="icon" type=“image/x-icon” href="faviconFolder/favicon001.ico" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="css/styleVisualizzaRubricaCliente.css" />
+
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif
+        }
+
+        .w3-bar .w3-button {
+
+            display: block;
+            padding: 0px;
+
+            border-bottom: 2px solid transparent;
+
+            transition: border-bottom-color 0.5s ease-out;
+            -webkit-transition: border-bottom-color 0.5s ease-out;
+        }
+
+
+        .w3-button:hover {
+            color: blue;
+            border-bottom-color: blue;
+        }
+    </style>
 </head>
-<body>
+
+<body style="background-color: #F5F5F5;">
+
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <a href="visualizza.php" class="w3-bar-item w3-button w3-wide"><img src="immaginiPersonale/logo.png"></a>
+            <!-- Parte destra navbar(opzionale) -->
+            <div class="w3-right w3-hide-small">
+            </div>
+
+
+        </div>
+    </div>
+
     <center>
-    <h1> Rubrica Personale</h1>
+
+    <div id="container"> 
+
+    <h2> Rubrica Personale</h2>
+
+    <br>
+    <hr class="linea">
+
+    <br>
+    <br>
+    
+    <div id="container2"> 
     <table>
 
     <?php if(isset($table))
@@ -60,10 +118,19 @@ else{
             ?>
 
     </table>
-    </center>
-    <footer>
-        <button onclick="window.location.href='creameeting.php'"> Indietro</button>
 
-    </footer>
+    </div>
+
+    </div>
+    
+    <br>
+
+        <button id="i_bback" name="n_bback" onclick="window.location.href='creameeting.php'"> Indietro</button>
+
+    <br>
+    <br>
+
+    </center>    
+
 </body>
 </html>
