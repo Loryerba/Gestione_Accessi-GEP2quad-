@@ -55,27 +55,90 @@ function redirect($errortype)
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='#'>
     <script src='#'></script>
+    <link rel="icon" type=“image/x-icon” href="faviconFolder/favicon001.ico" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="css/styleVPersAzienda.css" />
+
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Raleway", sans-serif
+        }
+
+        .w3-bar .w3-button {
+
+            display: block;
+            padding: 0px;
+
+            border-bottom: 2px solid transparent;
+
+            transition: border-bottom-color 0.5s ease-out;
+            -webkit-transition: border-bottom-color 0.5s ease-out;
+        }
+
+
+        .w3-button:hover {
+            color: blue;
+            border-bottom-color: blue;
+        }
+    </style>
+
 </head>
 
-<body>
-    <center>
-        <h1> Visualizza persone in azienda</h1>
-        <p id="i_description"> Attualmente in azienda sono presenti: </p>
-        <table id="i_tblpersone">
-        <?php
-        //Stampa della query contenente i record in mep con orario settato e uscita no
-        echo $table;
-        ?>
-           
-        </table>
- 
-    </center>
+<body style="background-color: #F5F5F5;">
 
-    <footer>
+    <!-- Navbar -->
+    <div class="w3-top">
+        <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+            <a href="visualizza.php" class="w3-bar-item w3-button w3-wide"><img src="immaginiPersonale/logo.png"></a>
+            <!-- Parte destra navbar(opzionale) -->
+            <div class="w3-right w3-hide-small">
+            </div>
+
+
+        </div>
+    </div>
+
+    <center>
+
+    <div id="container"> 
+
+        <h2> Visualizza persone in azienda</h2>
+        <br>
+        <hr class="linea">
+        <p id="i_description"> Attualmente in azienda sono presenti: </p>
+
+        <div id="container2"> 
+
+            <table id="i_tblpersone">
+                <?php
+                //Stampa della query contenente i record in mep con orario settato e uscita no
+                echo $table;
+                ?>
+           
+            </table>
+
+        </div>
+ 
+    </div>
+
+        <br>
+
 
         <button id="i_bback" name="n_bback" onclick="window.location.href='visualizza.php'"> Indietro </button>
 
-    </footer>
+        <br>
+        <br>
+
+    </center>
+
+
     <script>
         var totalRowCount = 0;
         var rowCount = 0;
