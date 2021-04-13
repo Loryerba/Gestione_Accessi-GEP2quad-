@@ -82,7 +82,7 @@ function redirect($errortype)
     <link rel="icon" type=“image/x-icon” href="faviconFolder/favicon001.ico" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="css/styleVPersAzienda.css" />
+    <link rel="stylesheet" href="css/styleModificaMeeting.css" />
 
     <style>
         body,
