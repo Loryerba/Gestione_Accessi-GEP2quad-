@@ -147,3 +147,37 @@ body{
     }
     
 }
+
+
+@media screen and (max-width: 450px) {
+
+    .container{
+
+        margin-top : 30%;
+
+    }
+
+
+}
+
+@media screen and (max-width: 633px) {
+
+    .container{
+
+        margin-top : 30%;
+
+    }
+
+
+}
+
+@media screen and (max-width: 1459px) {
+
+    .container{
+
+        margin-top : 10%;
+
+    }
+
+
+}
