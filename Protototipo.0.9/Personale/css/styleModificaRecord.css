@@ -1,0 +1,165 @@
+#container {
+  margin-top: 7%;
+}
+
+/* PER ESTETICA LINEAa */
+
+.linea {
+  border: none;
+  height: 20px;
+  width: 90%;
+  height: 50px;
+  margin-top: 0;
+  border-bottom: 1px solid #000000;
+  box-shadow: 0 20px 20px -20px rgb(88, 85, 85);
+  margin: -50px auto 10px;
+  animation: gradientRiga 25s ease infinite;
+}
+
+/* INPUT TYPE EMAIL */
+
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+  width: auto;
+  height: 4%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 2px solid #1b00b4a9;
+}
+
+input[type="number"] {
+    width: auto;
+    height: 4%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #1b00b4a9;
+}
+
+/* INPUT TYPE DATA EAND TIME */
+
+input[type="date"] {
+  width: auto;
+  padding: 10px 18px;
+  border: 2px solid #1b00b4a9;
+  border-radius: 4px;
+}
+
+input[type="time"] {
+  width: auto;
+  padding: 10px 18px;
+  border: 2px solid #1b00b4a9;
+  border-radius: 4px;
+}
+
+/* BOTTONE INDIETRO */
+
+#i_bback {
+  border-radius: 4px;
+  background-color: #ec5b6280;
+  border: 2px solid #b40009;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 18px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 4px 2px;
+  text-align: center;
+}
+
+#i_bback span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#i_bback:hover span {
+  padding-right: 25px;
+}
+
+#i_bback:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#i_bback:hover {
+  background-color: #b40009;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* BOTTONE CONFERMA */
+
+#n_submit {
+  border-radius: 4px;
+  background-color: #67ec5b80;
+  border: 2px solid #00b400;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  padding: 10px 18px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 4px 2px;
+  text-align: center;
+}
+
+#n_submit span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+#n_submit:hover span {
+  padding-right: 25px;
+}
+
+#n_submit:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+#n_submit:hover {
+  background-color: #00b400;
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Parte responsive */
+
+@media screen and (max-width: 1000px) {
+  #container {
+    margin-top: 16%;
+  }
+}
+
+@media screen and (max-width: 633px) {
+  #container {
+    margin-top: 20%;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #container {
+    margin-top: 30%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  #container {
+    margin-top: 40%;
+  }
+}
