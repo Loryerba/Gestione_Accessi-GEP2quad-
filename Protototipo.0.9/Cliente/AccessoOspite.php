@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="../css/styleCliente.css" />
     <!-- FONT -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <script src="js/script.js"></script>
+    <script src="../js/scriptCliente.js"></script>
     <!-- FAVICON -->
-    <link rel="icon" type=“image/x-icon” href="faviconFolder/favicon001.ico" />
+    <link rel="icon" type=“image/x-icon” href="../faviconFolder/favicon001.ico" />
 
 </head>
 

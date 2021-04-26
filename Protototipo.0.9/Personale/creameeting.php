@@ -93,10 +93,10 @@ function redirect($errortype)
     <title> Crea Meeting</title>
     <link rel="stylesheet" href="../css/styleCreaMeeting.css" />
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <script src='js/script.js'></script>
+    <script src='../js/scriptPersonale.js'></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="icon" type=“image/x-icon” href="faviconFolder/favicon001.ico" />
+    <link rel="icon" type=“image/x-icon” href="../faviconFolder/favicon001.ico" />
 
     <style>
         body,

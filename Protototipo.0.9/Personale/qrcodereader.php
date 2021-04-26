@@ -111,11 +111,13 @@ function warnAdmin($conn, $nomep, $cognomep, $emaila)
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = '465';
     $mail->isHTML();
+	//inserire la mail boot aziendale
     $mail->Username = "testdavide2021@gmail.com";
     $mail->Password = 'test12342021';
     $mail->Subject = 'Cliente arrivato.';
     $mail->Body = "<p> Il cliente $cognomep $nomep ha appena effettuato l'accesso in azienda</p>";
-    $mail->addAddress('cestinodirete@gmail.com');
+	//indirizzo mail dell'amministratore scelto per il meeting
+    $mail->addAddress($emaila);
 
     if (!$mail->send()) {
         //stampa del messaggio di errore durante l'invio della mail di notifica

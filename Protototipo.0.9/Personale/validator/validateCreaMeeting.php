@@ -55,7 +55,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $idc = $row['Id_P'];
                         // ottengo la descrizione del meeting
                         $descrizione = $_POST['n_descrizione'];
-                        addMeeting($ida, $idc, $orario, $datameeting, $descrizione, $conn);
+						//ottengo la mail del cliente
+						$mailc=$_POST["n_clemail"];
+                        addMeeting($ida, $idc, $orario, $datameeting, $descrizione, $conn, $mailc);
                     } else {
 
                         // chiusura connessione al database
@@ -126,7 +128,7 @@ function test_input($data)
 }
 
 
-function addMeeting($ida, $idc, $orario, $datameeting, $descrizione, $conn)
+function addMeeting($ida, $idc, $orario, $datameeting, $descrizione, $conn, $mailc)
 {
     // riformattazione dell'orario nel formato accettato dal database
     $orario = $orario->format('H:i');
@@ -139,7 +141,7 @@ function addMeeting($ida, $idc, $orario, $datameeting, $descrizione, $conn)
         //registrazione del log
         updateLog($conn);
         //funzione che invia la mail col qr code
-        sendEmail($conn, $datameeting, $orario, $lastid);
+        sendEmail($conn, $datameeting, $orario, $lastid, $mailc);
     } else {
         // caso in cui avviene un errore nell'inserimento nel database
         // redirect alla pagina creameeting.php con errror type = 6
@@ -173,7 +175,7 @@ function updateLog($conn)
 }
 
 
-function sendEmail($conn, $data, $ora, $lastid)
+function sendEmail($conn, $data, $ora, $lastid,$mailc)
 {
     $qrcode = new QRCode();
     $src = $qrcode->getQrCodeUrl("https://dbaccessi.000webhostapp.com/ProgettoPrimoPrototipo/Personale/qrcodereader.php?idm=$lastid", 300, 300, "UTF-8", "H");
@@ -185,14 +187,14 @@ function sendEmail($conn, $data, $ora, $lastid)
     $mail->Host = 'smtp.gmail.com';
     $mail->Port = '465';
     $mail->isHTML();
-    $mail->Username = 'lorenzoerba250@gmail.com';
-    $mail->Password = '';
+    $mail->Username = 'testdavide2021@gmail.com';
+    $mail->Password = 'test12342021';
     $mail->Subject = 'Meeting presso L2GM';
     $mail->Body = "<p> Spettabile Cliente, e' stato realizzato un meeting per il <b>$data</b> alle ore <b>$ora</b> presso la sede L2GM di Barlassina, via Giovanni Segantini 5.</p>
                     <img src='$src'>
                     <p> Scansiona il codice QR soprastante all'ingresso dell'azienda per l'accesso. Al momento dell'uscita scansiona lo stesso codice per uscire dall'azienda.</p>
                     <p> Per maggiori informazioni contattaci alla mail: info@l2gm.it oppure visita il nostro sito https://www.l2gm.eu/ </p>";
-    $mail->addAddress('cestinodirete@gmail.com');
+    $mail->addAddress($mailc);
     //Send
     //se l'invio della mail ha prodotto errori
     // redirect alla pagina index con error type = 8

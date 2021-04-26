@@ -10,11 +10,11 @@ html, body {
 }
 
 .frontend-side {
-  background-image: url("../immaginiIndex/background001.jpg");
+  background-image: url("../img/background001.jpg");
 }
 
 .client-side {
-  background-image: url("../immaginiIndex/background002.jpg");
+  background-image: url("../img/background002.jpg");
 }
 
 .split-pane {

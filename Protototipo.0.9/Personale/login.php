@@ -9,7 +9,7 @@
     <link rel='stylesheet' type='text/css' media='screen' href='#'>
     <link rel="stylesheet" href="../css/styleLogin.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> <!-- FONT BELLO -->
-    <link rel="icon" type= “image/x-icon”  href="faviconFolder/favicon001.ico"/>
+    <link rel="icon" type= “image/x-icon”  href="../faviconFolder/favicon001.ico"/>
     <script src='js/script.js'></script>
 </head>
 
@@ -22,7 +22,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <body>
     <center>
         <!-- Immagine in alto a sx -->
-        <a href="login.php"> <img src="#"> </a>
+        <a href="login.php"> <img src="immaginiPersonale/logo.png"> </a>
         <!-- Form per l'accesso al pannello amministrativo-->
             <form action="validator/validatelogin.php" method="post">
                 <h1> Login </h1>

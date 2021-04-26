@@ -5,7 +5,7 @@
     <title>Pannello principale</title>
     <link rel="stylesheet" href="css/styleIndex.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="icon" type= “image/x-icon”  href="faviconFolderIndex/favicon001.ico"/>
+    <link rel="icon" type= “image/x-icon”  href="faviconFolder/favicon001.ico"/>
 
     <style>
         
@@ -16,7 +16,7 @@
 
     <div class='split-pane col-xs-12 col-sm-6 client-side'>
         <div>
-            <img src="immaginiIndex/image002.png">
+            <img src="img/image002.png">
             <div class='text-content'>
                 <div class="bold">Accesso</div>
                 <div class='big'>CLIENTI</div>
@@ -33,7 +33,7 @@
 
     <div class='split-pane col-xs-12 col-sm-6 frontend-side'>
         <div>
-            <img src='immaginiIndex/image002.png'>
+            <img src='img/image002.png'>
             <div class='text-content'>
                 <div class="bold">Accesso</div>
                 <div class='big'>ADMIN</div>
@@ -47,7 +47,7 @@
     </div>
     <div id='split-pane-or'>
         <div>
-            <img src='immaginiIndex/image001.png'>
+            <img src='img/image001.png'>
         </div>
     </div>
 
