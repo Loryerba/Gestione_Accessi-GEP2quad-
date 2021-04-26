@@ -22,7 +22,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 <body>
     <center>
         <!-- Immagine in alto a sx -->
-        <a href="login.php"> <img src="immaginiPersonale/logo.png"> </a>
+        <a href="login.php"> <img src="../img/logo.png"> </a>
         <!-- Form per l'accesso al pannello amministrativo-->
             <form action="validator/validatelogin.php" method="post">
                 <h1> Login </h1>

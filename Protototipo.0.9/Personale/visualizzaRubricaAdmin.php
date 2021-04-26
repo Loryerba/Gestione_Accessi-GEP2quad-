@@ -90,7 +90,7 @@ else{
     <!-- Navbar -->
     <div class="w3-top">
         <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
-            <a href="adminPnl.php" class="w3-bar-item w3-button w3-wide"><img src="immaginiPersonale/logo.png"></a>
+            <a href="adminPnl.php" class="w3-bar-item w3-button w3-wide"><img src="../img/logo.png"></a>
             <!-- Parte destra navbar(opzionale) -->
             <div class="w3-right w3-hide-small">
             </div>
