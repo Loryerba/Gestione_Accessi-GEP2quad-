@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Creato il: Apr 23, 2021 alle 08:53
--- Versione del server: 10.3.16-MariaDB
--- Versione PHP: 7.3.23
+-- Host: 127.0.0.1
+-- Creato il: Mag 17, 2021 alle 18:13
+-- Versione del server: 10.4.14-MariaDB
+-- Versione PHP: 7.2.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -25,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Administrator`
+-- Struttura della tabella `administrator`
 --
 
-CREATE TABLE `Administrator` (
+CREATE TABLE `administrator` (
   `Id_A` int(11) NOT NULL,
   `Nome` text COLLATE utf8_unicode_ci NOT NULL,
   `Cognome` text COLLATE utf8_unicode_ci NOT NULL,
@@ -37,22 +36,23 @@ CREATE TABLE `Administrator` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dump dei dati per la tabella `Administrator`
+-- Dump dei dati per la tabella `administrator`
 --
 
-INSERT INTO `Administrator` (`Id_A`, `Nome`, `Cognome`, `Email`, `Password_`) VALUES
+INSERT INTO `administrator` (`Id_A`, `Nome`, `Cognome`, `Email`, `Password_`) VALUES
 (16, 'Matteo', 'Cacciarino', 'matcacciarino@gmail.com', '$2y$10$bLXOGcwEEuFYsY.XA/6EHOXGwqLBp7WSw/T0SeK5p4vVrvt4HClwi'),
 (17, 'Davide', 'Corbetta', 'davidecorbetta@outlook.com', '$2y$10$awfu2MCt6NzUxd9BOEQwXeHuVwb23tfP5enA3PFIarrNWU5Q.WOyC'),
 (18, 'Account', 'Prova', 'prova@hotmail.com', '$2y$10$yz4Ox/xJCBkgDEPiZrGacuAcyAAitbGqYCc6SSLRYVXo3YWEWkE0G'),
-(19, 'sa', 'sa', 'sa@sa.sa', '$2y$10$J0ih4nia6qceEgYqHJ3mWexvoReUVDrrZsfuFXaSsXMm3q9M4k4/6');
+(19, 'sa', 'sa', 'sa@sa.sa', '$2y$10$J0ih4nia6qceEgYqHJ3mWexvoReUVDrrZsfuFXaSsXMm3q9M4k4/6'),
+(20, 'Lorenzo', 'Erba', 'lorenzoerba250@gmail.com', '$2y$10$LnlrkXKVDlwsVpEfG3B6wepVKnfJ7oQ/.9YjdpgPDV47TNsUnl3DW');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Logs`
+-- Struttura della tabella `logs`
 --
 
-CREATE TABLE `Logs` (
+CREATE TABLE `logs` (
   `Id_L` int(11) NOT NULL,
   `OraL` time NOT NULL,
   `DataL` date NOT NULL,
@@ -61,10 +61,10 @@ CREATE TABLE `Logs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dump dei dati per la tabella `Logs`
+-- Dump dei dati per la tabella `logs`
 --
 
-INSERT INTO `Logs` (`Id_L`, `OraL`, `DataL`, `Descrizione`, `Id_A`) VALUES
+INSERT INTO `logs` (`Id_L`, `OraL`, `DataL`, `Descrizione`, `Id_A`) VALUES
 (92, '15:47:00', '2021-03-23', 'Administrator logged in', 16),
 (93, '15:48:00', '2021-03-23', 'Administrator logged in', 17),
 (94, '15:49:00', '2021-03-23', 'Administrator logged in', 18),
@@ -139,15 +139,34 @@ INSERT INTO `Logs` (`Id_L`, `OraL`, `DataL`, `Descrizione`, `Id_A`) VALUES
 (163, '11:44:00', '2021-04-20', 'Administrator logged in', 16),
 (164, '11:45:00', '2021-04-20', 'Administrator logged in', 16),
 (165, '11:46:00', '2021-04-20', 'Administrator logged in', 16),
-(166, '11:56:00', '2021-04-20', 'Administrator logged in', 17);
+(166, '11:56:00', '2021-04-20', 'Administrator logged in', 17),
+(167, '16:41:00', '2021-04-29', 'Administrator logged in', 16),
+(168, '16:43:00', '2021-04-29', 'Administrator logged in', 18),
+(169, '16:44:00', '2021-04-29', 'Administrator logged in', 18),
+(170, '16:45:00', '2021-04-29', 'Administrator logged in', 18),
+(171, '17:22:00', '2021-04-29', 'Administrator logged in', 16),
+(172, '17:25:00', '2021-04-29', 'Administrator logged in', 16),
+(173, '17:56:00', '2021-05-17', 'Administrator logged in', 16),
+(174, '17:57:00', '2021-05-17', 'Administrator deleted a meeting where id meeting is 31', 16),
+(175, '17:57:00', '2021-05-17', 'Administrator deleted a meeting where id meeting is 32', 16),
+(176, '17:57:00', '2021-05-17', 'Administrator deleted a meeting where id meeting is 33', 16),
+(177, '17:57:00', '2021-05-17', 'Administrator logged in', 16),
+(178, '17:58:00', '2021-05-17', 'Administrator logged in', 16),
+(179, '18:00:00', '2021-05-17', 'Administrator logged in', 16),
+(180, '18:03:00', '2021-05-17', 'Administrator logged in', 16),
+(181, '18:05:00', '2021-05-17', 'Administrator created a meeting', 16),
+(182, '18:08:00', '2021-05-17', 'Administrator created a meeting', 16),
+(183, '18:11:00', '2021-05-17', 'Administrator deleted a meeting where id meeting is 36', 16),
+(184, '18:12:00', '2021-05-17', 'Administrator deleted a meeting where id meeting is 35', 16),
+(185, '18:13:00', '2021-05-17', 'Administrator logged in', 20);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Meeting`
+-- Struttura della tabella `meeting`
 --
 
-CREATE TABLE `Meeting` (
+CREATE TABLE `meeting` (
   `Id_M` int(11) NOT NULL,
   `DataM` date NOT NULL,
   `OraM` time NOT NULL,
@@ -156,42 +175,26 @@ CREATE TABLE `Meeting` (
   `Descrizione` text COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dump dei dati per la tabella `Meeting`
---
-
-INSERT INTO `Meeting` (`Id_M`, `DataM`, `OraM`, `Id_A`, `Id_P`, `Descrizione`) VALUES
-(31, '2021-04-14', '17:11:00', 16, 1, ' provsa qrmodifi'),
-(32, '2021-04-07', '16:34:00', 16, 1, ' ciao'),
-(33, '2021-04-07', '16:32:00', 16, 1, ' ciao');
-
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `MeP`
+-- Struttura della tabella `mep`
 --
 
-CREATE TABLE `MeP` (
+CREATE TABLE `mep` (
   `Id_MP` int(11) NOT NULL,
   `CheckIn` time NOT NULL,
   `CheckOut` time NOT NULL,
   `Id_M` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Dump dei dati per la tabella `MeP`
---
-
-INSERT INTO `MeP` (`Id_MP`, `CheckIn`, `CheckOut`, `Id_M`) VALUES
-(46, '18:09:00', '18:09:00', 31);
-
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Partecipanti`
+-- Struttura della tabella `partecipanti`
 --
 
-CREATE TABLE `Partecipanti` (
+CREATE TABLE `partecipanti` (
   `Id_P` int(11) NOT NULL,
   `Nome` text COLLATE utf8_unicode_ci NOT NULL,
   `Cognome` text COLLATE utf8_unicode_ci NOT NULL,
@@ -199,10 +202,10 @@ CREATE TABLE `Partecipanti` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dump dei dati per la tabella `Partecipanti`
+-- Dump dei dati per la tabella `partecipanti`
 --
 
-INSERT INTO `Partecipanti` (`Id_P`, `Nome`, `Cognome`, `Email`) VALUES
+INSERT INTO `partecipanti` (`Id_P`, `Nome`, `Cognome`, `Email`) VALUES
 (1, 'Lorenzo', 'Erba', 'loryerba25@libero.it'),
 (3, 'Cliente', 'Cliente', 'cliente@gmail.com'),
 (4, 'dfgsdfg', 'sfdgsdgrf', 'sfdgsfg@dsfsdf.it');
@@ -212,37 +215,37 @@ INSERT INTO `Partecipanti` (`Id_P`, `Nome`, `Cognome`, `Email`) VALUES
 --
 
 --
--- Indici per le tabelle `Administrator`
+-- Indici per le tabelle `administrator`
 --
-ALTER TABLE `Administrator`
+ALTER TABLE `administrator`
   ADD PRIMARY KEY (`Id_A`);
 
 --
--- Indici per le tabelle `Logs`
+-- Indici per le tabelle `logs`
 --
-ALTER TABLE `Logs`
+ALTER TABLE `logs`
   ADD PRIMARY KEY (`Id_L`),
   ADD KEY `Id_A` (`Id_A`);
 
 --
--- Indici per le tabelle `Meeting`
+-- Indici per le tabelle `meeting`
 --
-ALTER TABLE `Meeting`
+ALTER TABLE `meeting`
   ADD PRIMARY KEY (`Id_M`),
   ADD KEY `Id_A` (`Id_A`),
   ADD KEY `Id_P` (`Id_P`);
 
 --
--- Indici per le tabelle `MeP`
+-- Indici per le tabelle `mep`
 --
-ALTER TABLE `MeP`
+ALTER TABLE `mep`
   ADD PRIMARY KEY (`Id_MP`),
   ADD KEY `Id_M` (`Id_M`);
 
 --
--- Indici per le tabelle `Partecipanti`
+-- Indici per le tabelle `partecipanti`
 --
-ALTER TABLE `Partecipanti`
+ALTER TABLE `partecipanti`
   ADD PRIMARY KEY (`Id_P`);
 
 --
@@ -250,33 +253,33 @@ ALTER TABLE `Partecipanti`
 --
 
 --
--- AUTO_INCREMENT per la tabella `Administrator`
+-- AUTO_INCREMENT per la tabella `administrator`
 --
-ALTER TABLE `Administrator`
-  MODIFY `Id_A` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+ALTER TABLE `administrator`
+  MODIFY `Id_A` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT per la tabella `Logs`
+-- AUTO_INCREMENT per la tabella `logs`
 --
-ALTER TABLE `Logs`
-  MODIFY `Id_L` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+ALTER TABLE `logs`
+  MODIFY `Id_L` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 
 --
--- AUTO_INCREMENT per la tabella `Meeting`
+-- AUTO_INCREMENT per la tabella `meeting`
 --
-ALTER TABLE `Meeting`
-  MODIFY `Id_M` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+ALTER TABLE `meeting`
+  MODIFY `Id_M` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
--- AUTO_INCREMENT per la tabella `MeP`
+-- AUTO_INCREMENT per la tabella `mep`
 --
-ALTER TABLE `MeP`
-  MODIFY `Id_MP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+ALTER TABLE `mep`
+  MODIFY `Id_MP` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT per la tabella `Partecipanti`
+-- AUTO_INCREMENT per la tabella `partecipanti`
 --
-ALTER TABLE `Partecipanti`
+ALTER TABLE `partecipanti`
   MODIFY `Id_P` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
@@ -284,23 +287,23 @@ ALTER TABLE `Partecipanti`
 --
 
 --
--- Limiti per la tabella `Logs`
+-- Limiti per la tabella `logs`
 --
-ALTER TABLE `Logs`
-  ADD CONSTRAINT `Logs_ibfk_1` FOREIGN KEY (`Id_A`) REFERENCES `Administrator` (`Id_A`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `logs`
+  ADD CONSTRAINT `Logs_ibfk_1` FOREIGN KEY (`Id_A`) REFERENCES `administrator` (`Id_A`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `Meeting`
+-- Limiti per la tabella `meeting`
 --
-ALTER TABLE `Meeting`
-  ADD CONSTRAINT `Meeting_ibfk_2` FOREIGN KEY (`Id_A`) REFERENCES `Administrator` (`Id_A`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Meeting_ibfk_3` FOREIGN KEY (`Id_P`) REFERENCES `Partecipanti` (`Id_P`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `meeting`
+  ADD CONSTRAINT `Meeting_ibfk_2` FOREIGN KEY (`Id_A`) REFERENCES `administrator` (`Id_A`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Meeting_ibfk_3` FOREIGN KEY (`Id_P`) REFERENCES `partecipanti` (`Id_P`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `MeP`
+-- Limiti per la tabella `mep`
 --
-ALTER TABLE `MeP`
-  ADD CONSTRAINT `MeP_ibfk_1` FOREIGN KEY (`Id_M`) REFERENCES `Meeting` (`Id_M`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `mep`
+  ADD CONSTRAINT `MeP_ibfk_1` FOREIGN KEY (`Id_M`) REFERENCES `meeting` (`Id_M`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
